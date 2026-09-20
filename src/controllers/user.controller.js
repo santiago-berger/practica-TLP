@@ -3,13 +3,18 @@ import { UserModel } from "../models/user.model.js";
 export const createUser = async (req, res) => {
 
     try {
-        const {name, email, password} = req.body;
+        const {name, email, password, person_id} = req.body;
 
         if (!name) {
             return res.status(400).json({message: "El user no debe ser vacío"});
         }
 
-        const user = await UserModel.create({name, email, password});
+        const user = await UserModel.create({
+            name, 
+            email, 
+            password, 
+            person_id
+        });
 
         return res.status(201).json(user);
 
