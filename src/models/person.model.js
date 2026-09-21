@@ -13,7 +13,7 @@ export const PersonModel = sequelize.define(
     last_name: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: true
+      unique: false
     },
   },
   {
