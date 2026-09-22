@@ -1,6 +1,8 @@
+import { body, param } from "express-validator"
+
 export const createTaskValidation = [
 
-    body("title")
+    bodydy("title")
         .notEmpty().withMessage("El título no debe estar vacío"),
     body("description")
         .notEmpty().withMessage("La descripción no debe estar vacía"),
@@ -11,7 +13,7 @@ export const createTaskValidation = [
 
 export const updateTaskValidation = [
 
-    param("id"),isInt().withMessage("El id debe ser un número entero").toInt(),
+    paramam("id").isInt().withMessage("El id debe ser un número entero").toInt(),
     body("title")
         .optional().notEmpty().withMessage("El título no debe estar vacío"),
     body("description")

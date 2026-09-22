@@ -16,7 +16,7 @@ export const createUserValidation = [
 
 export const updateUserValidation = [
 
-    param("id"),isInt().withMessage("El id debe ser un número entero").toInt(),
+    param("id").isInt().withMessage("El id debe ser un número entero").toInt(),
     body("name")
         .optional().notEmpty().withMessage("El nombre no debe estar vacío"),
     body("email")
