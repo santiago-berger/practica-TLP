@@ -14,6 +14,8 @@ export const createUser = async (req, res) => {
 
         const validatedData = matchedData(req);
 
+        // console.log(validatedData);
+
         // INSERT en la tabla Users
         const user = await UserModel.create(validatedData);
 
@@ -85,15 +87,17 @@ export const updateUser = async (req, res) => {
         // el operador rest (...) junta todo lo demas en el objeto data
         const {id, ...data} = matchedData(req);
 
-        const user = await UserModel.findByPk(id);
+        const userExist = await UserModel.findByPk(id);
 
         // primero se verifica que exista antes de intentar modificarlo
-        if (!user) return res.status(404).json({message: "Usuario no encontrado"});
+        if (!userExist) return res.status(404).json({message: "Usuario no encontrado"});
 
         // update() hace el UPDATE en la base solo con los campos enviados
-        await user.update(data);
+        await userExist.update(data); 
 
-        return res.status(200).json(user);
+        // console.log(dataValues);
+
+        return res.status(200).json({message: "Usuario editado correctamente"});
   
     } catch (error) {
         console.log(error)
@@ -109,12 +113,12 @@ export const deleteUser = async (req, res) => {
 
         const {id} = matchedData(req);
 
-        const user = await UserModel.findByPk(id);
+        const userExist = await UserModel.findByPk(id);
 
-        if (!user) return res.status(404).json({message: "Usuario no encontrado"});
+        if (!userExist) return res.status(404).json({message: "Usuario no encontrado"});
 
         // destroy() ejecuta el DELETE de ese registro
-        await user.destroy();
+        await userExist.destroy();
 
         return res.status(200).json({message: "Usuario eliminado"});
         

@@ -49,7 +49,11 @@ export const TaskModel = sequelize.define(
 // relaciones
 
 // relacion 1:N: la FK va del lado muchos, el cual es Task, porque una tarea pertenece a un usuario
-TaskModel.belongsTo(UserModel, {foreignKey: "user_id", as: "user"});
+TaskModel.belongsTo(UserModel, {
+  foreignKey: "user_id", 
+  as: "user", 
+  // onDelete: "CASCADE"
+});
 
 // un usuario tiene muchas tareas, habilita include con el alias "tasks"
 UserModel.hasMany(TaskModel, {foreignKey: "user_id", as: "tasks"})

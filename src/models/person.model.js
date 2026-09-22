@@ -25,6 +25,7 @@ export const PersonModel = sequelize.define(
     // Other model options go here
     // createdAt: "created_at",   // renombrar la columna de fecha de creacion
     // updatedAt: false,          // no generar la columna de fecha de actualizacion
-    // timestamps: false,         // no generar ninguna de las dos columnas de fecha
+    // timestamps: true, // no generar ninguna de las columnas de fecha
+    paranoid: true
   },
 );

@@ -42,12 +42,15 @@ export const UserModel = sequelize.define(
 // relacion 1:1
 
 // belongsTo crea la columna person_id (FK) dentro de la tabla Users
-UserModel.belongsTo(PersonModel, {foreignKey: {
-  name: "person_id",  // nombre de la columna de la clave foranea
-  allowNull: false,   // todo usuario debe estar asociado a una persona
-  unique: true        // al ser unica, una persona solo puede tener un usuario
-
-}, as: "person"}); // alias que se usa despues en los include de las consultas
+UserModel.belongsTo(PersonModel, {
+  foreignKey: {
+    name: "person_id",  // nombre de la columna de la clave foranea
+    allowNull: false,   // todo usuario debe estar asociado a una persona
+    unique: true        // al ser unica, una persona solo puede tener un usuario
+  }, 
+  as: "person", 
+  // onDelete: "CASCADE"
+}); // alias que se usa despues en los include de las consultas
 
 // no crea columna nueva, solo permite consultar
 // la persona junto con su usuario (include: {model: UserModel, as: "user"})

@@ -27,9 +27,5 @@ export const updateUserValidation = [
     body("name")
         .optional().notEmpty().withMessage("El nombre no debe estar vacío"),
     body("email")
-        .optional().notEmpty().withMessage("El email no debe estar vacío").isEmail().withMessage("El email debe ser válido"),
-    body("password")
-        .optional().notEmpty().withMessage("La password no debe estar vacía"),
-    body("person_id")
-        .optional().isInt().withMessage("El person_id debe ser un número entero").toInt(),
+        .optional().notEmpty().withMessage("El email no debe estar vacío").isEmail().withMessage("El email debe ser válido")
 ]
