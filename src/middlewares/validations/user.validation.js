@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 export const createUserValidation = [
 
@@ -10,18 +10,19 @@ export const createUserValidation = [
     body("password")
         .notEmpty().withMessage("La password no debe estar vacía"),
     body("person_id")
-        .notEmpty().withMessage("El person_id no debe estar vacío"),
+        .notEmpty().withMessage("El person_id no debe estar vacío")
+        .isInt().withMessage("El person_id debe ser un número entero").toInt(),
 ]
 
 export const updateUserValidation = [
 
+    param("id"),isInt().withMessage("El id debe ser un número entero").toInt(),
     body("name")
         .optional().notEmpty().withMessage("El nombre no debe estar vacío"),
     body("email")
-        .notEmpty().withMessage("El email no debe estar vacío")
-        .isEmail().withMessage("El email debe ser válido"),
+        .optional().notEmpty().withMessage("El email no debe estar vacío").isEmail().withMessage("El email debe ser válido"),
     body("password")
-        .notEmpty().withMessage("La password no debe estar vacía"),
+        .optional().notEmpty().withMessage("La password no debe estar vacía"),
     body("person_id")
-        .notEmpty().withMessage("El person_id no debe estar vacío"),
+        .optional().isInt().withMessage("El person_id debe ser un número entero").toInt(),
 ]
