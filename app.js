@@ -6,16 +6,22 @@ import { startDB } from "./src/config/database.js";
 import { userRouter } from "./src/routes/user.routes.js";
 import { taskRouter } from "./src/routes/task.routes.js";
 import { personRouter } from "./src/routes/person.routes.js";
+import { authRouter } from "./src/routes/auth.routes.js";
+
+import "dotenv/config";
+import cookieParser from "cookie-parser";
 
 // se crea la instancia de la aplicacion de express (el servidor)
 const app = express();
 // puerto en el que va a escuchar el servidor
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // para que entienda el formato json
 
 // middleware global: parsea el body de las peticiones con Content-Type json y lo deja en req.body
 app.use(express.json());
+
+app.use(cookieParser()); //necesario para leer req.cookies
 
 // configuracion de las rutas
 
@@ -23,6 +29,7 @@ app.use(express.json());
 app.use("/api", userRouter);
 app.use("/api", taskRouter);
 app.use("/api", personRouter);
+app.use("/api", authRouter);
 
 // levanta el servidor y queda escuchando peticiones en el puerto indicado
 app.listen(PORT, async () => {

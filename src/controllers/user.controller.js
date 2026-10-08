@@ -124,6 +124,11 @@ export const deleteUser = async (req, res) => {
         
     } catch (error) {
         console.log(error)
+
+        if (error.name === "SequelizeForeignKeyConstraintError") {
+            return res.status(409).json({ message: "No se puede eliminar: tiene registros asociados" });
+        };
+
         return res.status(500).json({message: "Error interno del servidor"})
     }
 };

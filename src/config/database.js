@@ -16,7 +16,7 @@ export const startDB = async () => {
     await sequelize.authenticate();
     // sync() crea las tablas a partir de los modelos definidos
     // force: true borra y vuelve a crear las tablas en cada arranque
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     console.log("Conexion a la db esta lista");
   } catch (error) {
     // si algo falla no se corta la app, solo se informa el error por consola

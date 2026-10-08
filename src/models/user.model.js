@@ -11,7 +11,7 @@ export const UserModel = sequelize.define(
   "User",
   {
     // los atributos o propiedades del modelo se definen acá
-    name: {
+    username: {
       type: DataTypes.STRING(100),
       allowNull: false // obligatorio
     },

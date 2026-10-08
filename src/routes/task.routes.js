@@ -8,6 +8,7 @@ import { createTaskValidation, updateTaskValidation } from "../middlewares/valid
 import { validate } from "../middlewares/validate.js";
 // validacion generica del :id de la URL
 import { idParamValidation } from "../middlewares/validations/param.validation.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 // se crea el router de tareas
 export const taskRouter = Router();
@@ -15,7 +16,7 @@ export const taskRouter = Router();
 // orden de ejecucion: validaciones -> validate -> controlador
 taskRouter.post("/tasks", createTaskValidation, validate, createTask);
 // GET de todos no lleva validaciones porque no recibe datos del cliente
-taskRouter.get("/tasks", getAllTasks);
+taskRouter.get("/tasks", authMiddleware, getAllTasks);
 // :id es un parametro dinamico de la URL, se lee con req.params.id
 taskRouter.get("/tasks/:id", idParamValidation, validate, getTaskById);
 // PUT valida el id de la URL y los campos del body

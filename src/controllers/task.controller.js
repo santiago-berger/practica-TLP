@@ -32,6 +32,14 @@ export const getAllTasks = async (req, res) => {
 
     try {
 
+        console.log(req.user.idUser);
+
+        const usuarioLogueado = await UserModel.findOne({
+            where: {
+                id: req.user.idUser,
+            }
+        })
+
         // findAll() = SELECT * FROM Tasks, con JOINs anidados
         const tasks = await TaskModel.findAll({
 
@@ -58,7 +66,10 @@ export const getAllTasks = async (req, res) => {
             ]
         });
 
-        return res.status(200).json(tasks);
+        return res.status(200).json({
+            tasks,
+            message: `Hola ${usuarioLogueado.username}`,
+        });
 
     } catch (error) {
         console.log(error)
